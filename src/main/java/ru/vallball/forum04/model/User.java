@@ -1,17 +1,16 @@
 package ru.vallball.forum04.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -40,7 +39,6 @@ public class User implements UserDetails {
 
     @NotNull
     @Column(name = "date_of_birth")
-    @JsonFormat(pattern = "yyyy.MM.dd")
     private LocalDate dateOfBirth;
 
 
@@ -114,4 +112,10 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public User toUser(PasswordEncoder passwordEncoder) {
+        this.setPassword(passwordEncoder.encode(password));
+        return this;
+    }
+
 }
