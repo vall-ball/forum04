@@ -25,7 +25,7 @@ public class Topic {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="username")
+    @JoinColumn(name="user_id")
     User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,8 +33,7 @@ public class Topic {
 
     @OneToMany(
             mappedBy = "topic",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     private List<Message> messages = new ArrayList<>();
 

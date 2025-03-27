@@ -70,19 +70,20 @@ CREATE TABLE IF NOT EXISTS public.topics
     id bigint NOT NULL DEFAULT nextval('topics_id_seq'::regclass),
     name character varying(300) COLLATE pg_catalog."default" NOT NULL,
     date_time time with time zone NOT NULL,
-    username character varying(50) COLLATE pg_catalog."default" NOT NULL,
     section_id bigint,
     count_of_messages bigint,
+    user_id bigint NOT NULL,
     CONSTRAINT topics_pkey PRIMARY KEY (id),
     CONSTRAINT topic_name UNIQUE (name),
     CONSTRAINT section_id FOREIGN KEY (section_id)
         REFERENCES public.sections (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    CONSTRAINT username FOREIGN KEY (username)
-        REFERENCES public.users (username) MATCH SIMPLE
+    CONSTRAINT user_id FOREIGN KEY (user_id)
+        REFERENCES public.users (sid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
+        NOT VALID
 )
 
 TABLESPACE pg_default;
@@ -100,18 +101,19 @@ CREATE TABLE IF NOT EXISTS public.messages
     id bigint NOT NULL DEFAULT nextval('messages_id_seq'::regclass),
     date_time timestamp with time zone NOT NULL,
     text text COLLATE pg_catalog."default" NOT NULL,
-    username character varying(50) COLLATE pg_catalog."default" NOT NULL,
     topic_id bigint,
     number_in_topic bigint,
+    user_id bigint,
     CONSTRAINT messages_pkey PRIMARY KEY (id),
     CONSTRAINT topic_id FOREIGN KEY (topic_id)
         REFERENCES public.topics (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    CONSTRAINT username FOREIGN KEY (username)
-        REFERENCES public.users (username) MATCH SIMPLE
+    CONSTRAINT user_id FOREIGN KEY (user_id)
+        REFERENCES public.users (sid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
+        NOT VALID
 )
 
 TABLESPACE pg_default;

@@ -19,13 +19,12 @@ public class Section {
     @Column(unique=true)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Category category;
 
     @OneToMany(
             mappedBy = "section",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     private List<Topic> topics = new ArrayList<>();
 

@@ -1,5 +1,7 @@
 package ru.vallball.forum04.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
@@ -46,10 +48,12 @@ public class TopicDTO {
         this.user = user;
     }
 
+    @JsonIgnore
     public SectionDTO getSection() {
         return section;
     }
 
+    @JsonProperty
     public void setSection(SectionDTO section) {
         this.section = section;
     }

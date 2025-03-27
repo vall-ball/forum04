@@ -22,14 +22,14 @@ public class Message {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="username")
+    @JoinColumn(name="user_id")
     User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     Topic topic;
 
     @Column(name = "number_in_topic")
-    private long numberInTopic = topic.getCountOfMessages() + 1;
+    private long numberInTopic = -1;
 
     public Long getId() {
         return id;
@@ -65,6 +65,7 @@ public class Message {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+        this.numberInTopic = topic.getCountOfMessages() + 1;
     }
 
     public long getNumberInTopic() {

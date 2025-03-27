@@ -11,21 +11,26 @@ import java.util.List;
 public class CategoryConverter {
 
     public static CategoryDTO convertToDto(Category category) {
+        System.out.println("--------------------------- CategoryConverter");
         CategoryDTO dto = new CategoryDTO();
         dto.setName(category.getName());
         List<SectionDTO> list = new ArrayList<>();
-        for (Section)
-
+        for (Section s : category.getSections()) {
+            list.add(SectionConverter.convertToDto(s));
+        }
+        dto.setSections(list);
         return dto;
     }
 
-    public static User convertToEntity(UserDTO dto) {
-        User user = new User();
-        user.setUsername(dto.getUsername());
-        user.setPassword(dto.getPassword());
-        user.setRole(dto.getRole());
-        user.setEmail(dto.getEmail());
-        user.setDateOfBirth(dto.getDateOfBirth());
-        return user;
+    public static Category convertToEntity(CategoryDTO dto) {
+        System.out.println("++++++++++++++++++++++++++ CategoryConverter");
+        Category category = new Category();
+        category.setName(dto.getName());
+        List<Section> list = new ArrayList<>();
+        for (SectionDTO s : dto.getSections()) {
+            list.add(SectionConverter.convertToEntity(s));
+        }
+        category.setSections(list);
+        return category;
     }
 }

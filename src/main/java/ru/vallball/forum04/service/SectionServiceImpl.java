@@ -3,6 +3,7 @@ package ru.vallball.forum04.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.vallball.forum04.dao.CategoryRepository;
 import ru.vallball.forum04.dao.SectionRepository;
 import ru.vallball.forum04.model.Section;
 
@@ -15,8 +16,15 @@ public class SectionServiceImpl implements SectionService {
     @Autowired
     SectionRepository sectionRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
     @Override
     public void save(Section section) {
+        System.out.println(" @@@@@@@@@@@@@@@@@@public void save(Section section) {");
+        System.out.println(section.getCategory());
+        section.setCategory(categoryRepository.findByName(section.getCategory().getName()));
+        System.out.println(" end of public void save(Section section) {");
         sectionRepository.save(section);
     }
 

@@ -29,6 +29,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/users/for_users/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
                         .requestMatchers("/users/**").permitAll()
+                        .requestMatchers("/forum/category/**").hasAnyRole("ADMIN", "MODERATOR")
+                        .requestMatchers("/forum/section/**").hasAnyRole("ADMIN", "MODERATOR")
+                        .requestMatchers("/forum/**").permitAll()
                 );
 
         return http.build();

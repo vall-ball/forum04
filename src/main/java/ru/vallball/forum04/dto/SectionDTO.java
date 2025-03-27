@@ -1,5 +1,7 @@
 package ru.vallball.forum04.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
@@ -22,10 +24,12 @@ public class SectionDTO {
         this.name = name;
     }
 
+    @JsonIgnore
     public CategoryDTO getCategory() {
         return category;
     }
 
+    @JsonProperty
     public void setCategory(CategoryDTO category) {
         this.category = category;
     }
