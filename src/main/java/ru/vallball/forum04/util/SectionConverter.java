@@ -10,7 +10,6 @@ import java.util.List;
 
 public class SectionConverter {
     public static SectionDTO convertToDto(Section section) {
-        System.out.println("--------------------------- SectionConverter");
         SectionDTO dto = new SectionDTO();
         dto.setName(section.getName());
         List<TopicDTO> list = new ArrayList<>();
@@ -22,7 +21,6 @@ public class SectionConverter {
     }
 
     public static Section convertToEntity(SectionDTO dto) {
-        System.out.println("+++++++++++++++++++++++++++++++++++- SectionConverter");
         Section section = new Section();
         section.setName(dto.getName());
         List<Topic> list = new ArrayList<>();
@@ -30,7 +28,6 @@ public class SectionConverter {
             list.add(TopicConverter.convertToEntity(t));
         }
         section.setTopics(list);
-        System.out.println("###################################- SectionConverter");
         return section;
     }
 }

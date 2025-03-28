@@ -20,11 +20,8 @@ public class SectionServiceImpl implements SectionService {
     CategoryRepository categoryRepository;
 
     @Override
-    public void save(Section section) {
-        System.out.println(" @@@@@@@@@@@@@@@@@@public void save(Section section) {");
-        System.out.println(section.getCategory());
-        section.setCategory(categoryRepository.findByName(section.getCategory().getName()));
-        System.out.println(" end of public void save(Section section) {");
+    public void save(Section section, String categoryName) {
+        section.setCategory(categoryRepository.findByName(categoryName));
         sectionRepository.save(section);
     }
 
@@ -42,7 +39,6 @@ public class SectionServiceImpl implements SectionService {
     public void update(String name, Section section) {
         Section sectionForUpdate = sectionRepository.findByName(name);
         sectionForUpdate.setName(section.getName());
-        sectionForUpdate.setCategory(section.getCategory());
         sectionForUpdate.setTopics(section.getTopics());
         sectionRepository.save(sectionForUpdate);
     }

@@ -28,7 +28,7 @@ public class Topic {
     @JoinColumn(name="user_id")
     User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Section section;
 
     @OneToMany(

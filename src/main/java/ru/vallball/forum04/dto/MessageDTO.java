@@ -1,25 +1,19 @@
 package ru.vallball.forum04.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
 public class MessageDTO {
 
-    @NotNull
     private LocalDateTime dateTime;
 
     @NotNull
     private String text;
 
-    @NotNull
     private UserDTO user;
 
-    private TopicDTO topic;
-
-    //private long numberInTopic = topic.getCountOfMessages() + 1;
+    private long numberInTopic;
 
     public LocalDateTime getDateTime() {
         return dateTime;
@@ -45,14 +39,11 @@ public class MessageDTO {
         this.user = user;
     }
 
-    @JsonIgnore
-    public TopicDTO getTopic() {
-        return topic;
+    public long getNumberInTopic() {
+        return numberInTopic;
     }
 
-    @JsonProperty
-    public void setTopic(TopicDTO topic) {
-        this.topic = topic;
+    public void setNumberInTopic(long numberInTopic) {
+        this.numberInTopic = numberInTopic;
     }
-
 }

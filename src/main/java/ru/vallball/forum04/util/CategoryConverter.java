@@ -11,7 +11,6 @@ import java.util.List;
 public class CategoryConverter {
 
     public static CategoryDTO convertToDto(Category category) {
-        System.out.println("--------------------------- CategoryConverter");
         CategoryDTO dto = new CategoryDTO();
         dto.setName(category.getName());
         List<SectionDTO> list = new ArrayList<>();
@@ -23,7 +22,6 @@ public class CategoryConverter {
     }
 
     public static Category convertToEntity(CategoryDTO dto) {
-        System.out.println("++++++++++++++++++++++++++ CategoryConverter");
         Category category = new Category();
         category.setName(dto.getName());
         List<Section> list = new ArrayList<>();

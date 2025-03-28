@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SectionService {
 
-    void save(Section section);
+    void save(Section section, String categoryName);
 
     List<Section> list();
 

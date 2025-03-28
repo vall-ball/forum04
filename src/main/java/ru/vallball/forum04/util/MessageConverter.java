@@ -9,6 +9,8 @@ public class MessageConverter {
         MessageDTO dto = new MessageDTO();
         dto.setText(message.getText());
         dto.setDateTime(message.getDateTime());
+        dto.setUser(UserConverter.convertToDto(message.getUser()));
+        dto.setNumberInTopic(message.getNumberInTopic());
         return dto;
     }
 
@@ -16,6 +18,7 @@ public class MessageConverter {
         Message message = new Message();
         message.setDateTime(dto.getDateTime());
         message.setText(dto.getText());
+        message.setUser(UserConverter.convertToEntity(dto.getUser()));
         return message;
     }
 }

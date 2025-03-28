@@ -18,6 +18,8 @@ public class TopicConverter {
         dto.setMessages(list);
         dto.setName(topic.getName());
         dto.setDateTime(topic.getDateTime());
+        dto.setCountOfMessages(topic.getCountOfMessages());
+        dto.setUser(UserConverter.convertToDto(topic.getUser()));
         return dto;
     }
 
@@ -30,6 +32,7 @@ public class TopicConverter {
             list.add(MessageConverter.convertToEntity(m));
         }
         topic.setMessages(list);
+        topic.setUser(UserConverter.convertToEntity(dto.getUser()));
         return topic;
     }
 }

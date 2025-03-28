@@ -31,7 +31,13 @@ public class SecurityConfig {
                         .requestMatchers("/users/**").permitAll()
                         .requestMatchers("/forum/category/**").hasAnyRole("ADMIN", "MODERATOR")
                         .requestMatchers("/forum/section/**").hasAnyRole("ADMIN", "MODERATOR")
-                        .requestMatchers("/forum/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/forum/topic/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/forum/topic/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/forum/topic/**").hasAnyRole("ADMIN", "MODERATOR")
+                        .requestMatchers(HttpMethod.POST, "/forum/topic/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/forum/topic/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/forum/topic/**").authenticated()
+                        .requestMatchers("/forum").permitAll()
                 );
 
         return http.build();

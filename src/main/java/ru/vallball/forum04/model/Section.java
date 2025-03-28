@@ -19,7 +19,7 @@ public class Section {
     @Column(unique=true)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
     private Category category;
 
     @OneToMany(
