@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/forum/topic/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/forum/topic/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/forum/topic/**").authenticated()
+                        .requestMatchers("/forum/message/**").authenticated()
                         .requestMatchers("/forum").permitAll()
                 );
 

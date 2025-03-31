@@ -69,10 +69,10 @@ CREATE TABLE IF NOT EXISTS public.topics
 (
     id bigint NOT NULL DEFAULT nextval('topics_id_seq'::regclass),
     name character varying(300) COLLATE pg_catalog."default" NOT NULL,
-    date_time time with time zone NOT NULL,
     section_id bigint,
     count_of_messages bigint,
     user_id bigint NOT NULL,
+    date_time timestamp with time zone NOT NULL,
     CONSTRAINT topics_pkey PRIMARY KEY (id),
     CONSTRAINT topic_name UNIQUE (name),
     CONSTRAINT section_id FOREIGN KEY (section_id)
@@ -99,11 +99,11 @@ ALTER TABLE IF EXISTS public.topics
 CREATE TABLE IF NOT EXISTS public.messages
 (
     id bigint NOT NULL DEFAULT nextval('messages_id_seq'::regclass),
-    date_time timestamp with time zone NOT NULL,
     text text COLLATE pg_catalog."default" NOT NULL,
     topic_id bigint,
     number_in_topic bigint,
     user_id bigint,
+    date_time timestamp with time zone,
     CONSTRAINT messages_pkey PRIMARY KEY (id),
     CONSTRAINT topic_id FOREIGN KEY (topic_id)
         REFERENCES public.topics (id) MATCH SIMPLE

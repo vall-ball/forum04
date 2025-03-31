@@ -35,6 +35,7 @@ public class Topic {
             mappedBy = "topic",
             cascade = CascadeType.ALL
     )
+    @OrderBy("numberInTopic")
     private List<Message> messages = new ArrayList<>();
 
     @Column(name = "count_of_messages")
@@ -97,5 +98,9 @@ public class Topic {
 
     public long getCountOfMessages() {
         return countOfMessages;
+    }
+
+    public void setCountOfMessages(long countOfMessages) {
+        this.countOfMessages = countOfMessages;
     }
 }

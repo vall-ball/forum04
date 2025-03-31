@@ -29,13 +29,16 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void save(Message message, String topicName, String username) {
         message.setUser(userRepository.findByUsername(username));
-        message.setTopic(topicRepository.findByName(topicName));
+        Topic topic = topicRepository.findByName(topicName);
+        message.setTopic(topic);
+        topic.setCountOfMessages(topic.getCountOfMessages() + 1);
         messageRepository.save(message);
+        topicRepository.save(topic);
     }
 
     @Override
     public List<Message> list() {
-        return messageRepository.findAll();
+        return messageRepository.findByOrderByNumberInTopic();
     }
 
     @Override

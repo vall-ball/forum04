@@ -120,7 +120,7 @@ public class ForumController {
         return new ResponseEntity<>("The topic is updated successfully", HttpStatus.ACCEPTED);
     }
 
-    //work with topics
+    //work with messages
     @PostMapping("message/{topicName}")
     public ResponseEntity<Object> createMessage(@AuthenticationPrincipal User principal, @RequestBody MessageDTO messageDTO, @PathVariable(value = "topicName") String topicName) {
         messageDTO.setUser(UserConverter.convertToDto(principal));
