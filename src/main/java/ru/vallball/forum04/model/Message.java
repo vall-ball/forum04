@@ -65,10 +65,16 @@ public class Message {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
-        this.numberInTopic = topic.getCountOfMessages() + 1;
+        if (topic != null) {
+            this.numberInTopic = topic.getCountOfMessages() + 1;
+        }
     }
 
     public long getNumberInTopic() {
         return numberInTopic;
+    }
+
+    public void setNumberInTopic(long numberInTopic) {
+        this.numberInTopic = numberInTopic;
     }
 }

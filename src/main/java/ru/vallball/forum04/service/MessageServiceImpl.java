@@ -46,7 +46,16 @@ public class MessageServiceImpl implements MessageService {
         Topic topic = topicRepository.findByName(topicName);
         Message message = messageRepository.findByTopicAndNumberInTopic(topic, numberInTopic);
         if (principal.getRole().equals(Role.ROLE_ADMIN) || principal.getRole().equals(Role.ROLE_MODERATOR) || message.getUser().getUsername().equals(principal.getUsername())) {
+            topic.setCountOfMessages(topic.getCountOfMessages() - 1);
+            topic.removeMessage(message);
+            topicRepository.save(topic);
             messageRepository.delete(message);
+            for (Message m : topic.getMessages()) {
+                if (m.getNumberInTopic() > numberInTopic) {
+                    m.setNumberInTopic(m.getNumberInTopic() - 1);
+                    messageRepository.save(m);
+                }
+            }
         } else {
             throw new Exception("You don't have rights!");
         }
@@ -56,10 +65,8 @@ public class MessageServiceImpl implements MessageService {
     public void update(String topicName, long numberInTopic, Message message) throws Exception {
         Message messageForUpdate = messageRepository.findByTopicAndNumberInTopic(topicRepository.findByName(topicName), numberInTopic);
         if (message.getUser().getRole().equals(Role.ROLE_ADMIN) || message.getUser().getRole().equals(Role.ROLE_MODERATOR) || message.getUser().getUsername().equals(messageForUpdate.getUser().getUsername())) {
-            messageForUpdate.setTopic(message.getTopic());
-            messageForUpdate.setText(message.getText());
-            messageForUpdate.setUser(message.getUser());
-            messageForUpdate.setDateTime(message.getDateTime());
+            messageForUpdate.setText(message.getText() + System.lineSeparator() + "Изменено " + message.getDateTime());
+            messageForUpdate.setUser(userRepository.findByUsername(message.getUser().getUsername()));
             messageRepository.save(messageForUpdate);
         } else {
             throw new Exception("You don't have rights!");

@@ -142,6 +142,7 @@ public class ForumController {
     @PutMapping("message/{topicName}/{numberInTopic}")
     public ResponseEntity<Object> updateMessage(@AuthenticationPrincipal User principal, @PathVariable(value = "topicName") String topicName, @PathVariable(value = "numberInTopic") long numberInTopic, @RequestBody MessageDTO messageDTO) throws Exception {
         messageDTO.setUser(UserConverter.convertToDto(principal));
+        messageDTO.setDateTime(LocalDateTime.now());
         messageService.update(topicName, numberInTopic, MessageConverter.convertToEntity(messageDTO));
         return new ResponseEntity<>("The message is updated successfully", HttpStatus.ACCEPTED);
     }
